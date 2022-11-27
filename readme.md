@@ -5,3 +5,7 @@ Os agentes A,B,C,D,E,F,G e H são conspiradores políticos. De forma a coorderna
 ![Conspiradores](./grafo.png)
 
 Todas as comunicações indiretas são impraticáveis pois exporiam todos os esquemas de disfarce. Qual é o menor risco total envolvido neste sistema de conexão, ou seja, o menor risco para que uma mensagem seja repassada para todos os conspiradores?
+
+<hr>
+
+Sexto Problema da Lista de problemas.
