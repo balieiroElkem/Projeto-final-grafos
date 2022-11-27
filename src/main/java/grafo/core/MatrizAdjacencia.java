@@ -79,8 +79,8 @@ class MatrizAdjacencia {
 	
 	void copiaValoresPara(MatrizAdjacencia matrizDestino) throws Exception {
 		if(matrizDestino.getQtdVertices() < this.qtdVertices) {
-			throw new Exception("Somente Ã© possÃ­vel executar cÃ³pias em matrizes com dimensÃµes iguais "
-					+ "ou a matriz de destino deve ter dimensÃµes maiores que a matriz de origem.");
+			throw new Exception("Somente é possível executar cópias em matrizes com dimensões iguais "
+					+ "ou a matriz de destino deve ter dimensões maiores que a matriz de origem.");
 		}
 		for(int i=0; i<matriz.length; i++) {
 			for(int j=0; j<matriz[i].length; j++) {

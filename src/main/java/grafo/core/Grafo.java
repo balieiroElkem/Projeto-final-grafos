@@ -21,16 +21,15 @@ public class Grafo {
 
 	public Grafo(int qtdVertices) {
 		if (qtdVertices <= 0) {
-			throw new IllegalArgumentException("A quantidade máxima de vértices deve ser maior ou igual a 1");
+			throw new IllegalArgumentException("A quantidade máxima de vértices deve ser maior ou igual à 1");
 		}
 		qtdMaximaVertices = qtdVertices;
 		isQtdMaximaDefinida = true;
 	}
 
-	public void adicionarVertice(String rotulo, String produto) throws Exception {
+	public void adicionarVertice(String rotulo) throws Exception {
 		if (qtdAtualVertices <= qtdMaximaVertices - 1) {
 			Vertice novoVertice = new Vertice(rotulo);
-			novoVertice.setProduto(produto);
 			this.vertices.add(novoVertice);
 			this.rotulosEmIndices.put(rotulo, qtdAtualVertices);
 			qtdAtualVertices++;
@@ -96,7 +95,7 @@ public class Grafo {
 		List<Vertice> vertices = getVertices();
 
 		for (Vertice v : vertices) {
-			arvore.adicionarVertice(v.getRotulo(), v.getProduto());
+			arvore.adicionarVertice(v.getRotulo());
 		}
 
 		Vertice verticePontoDePartida = vertices.get(0);

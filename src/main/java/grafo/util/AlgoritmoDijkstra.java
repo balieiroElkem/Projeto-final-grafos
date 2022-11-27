@@ -22,7 +22,7 @@ public class AlgoritmoDijkstra {
 		return algoritmoDijkstra;
 	}
 
-	public Map<String, Info> processar(String origem, String destino, Grafo grafo) {
+	public String processarCaminho(String origem, String destino, Grafo grafo) {
 		try {
 			grafo.getVertice(origem);
 			grafo.getVertice(destino);
@@ -34,6 +34,7 @@ public class AlgoritmoDijkstra {
 		infoVertice.put(origem, new Info(0, null));
 
 		Set<String> aVisitar = new HashSet<>();
+		String caminho = "";
 		aVisitar.add(origem);
 
 		while (aVisitar.size() > 0) {
@@ -47,8 +48,18 @@ public class AlgoritmoDijkstra {
 				}
 			}
 
-			if (melhorVertice.equals(destino))
+			if (melhorVertice.equals(destino)) {
+				Info i = infoVertice.get(melhorVertice);
+				caminho += melhorVertice;
+				int riscos = i.distancia;
+				while (i.predecessor != null) {
+					caminho += " > " + i.predecessor.getRotulo();
+					i = infoVertice.get(i.predecessor.getRotulo());
+				}
+				caminho = i.reverse(caminho);
+				caminho += ": " + riscos + " riscos";
 				break;
+			}
 
 			aVisitar.remove(melhorVertice);
 
@@ -68,68 +79,26 @@ public class AlgoritmoDijkstra {
 			}
 		}
 
-		return infoVertice;
-	}
-
-	public Map<String, Info> procurarProduto(String origem, final String produto, Grafo grafo) {
-		try {
-			grafo.getVertice(origem);
-			// grafo.getVertice(destino);
-		} catch (Exception e) {
-			throw e;
-		}
-
-		Map<String, Info> infoVertice = new HashMap<>();
-		Map<String, Info> verticeProduto = new HashMap<>();
-		infoVertice.put(origem, new Info(0, null));
-
-		Set<Vertice> aVisitar = new HashSet<>();
-		aVisitar.add(grafo.getVertice(origem));
-
-		while (aVisitar.size() > 0) {
-			Vertice melhorVertice = null;
-			int menorDistancia = Integer.MAX_VALUE;
-			for (Vertice v : aVisitar) {
-				Info info = infoVertice.get(v.getRotulo());
-				if (info.distancia < menorDistancia) {
-					melhorVertice = v;
-					menorDistancia = info.distancia;
-				}
-			}
-
-			if (melhorVertice.getProduto().equals(produto)) {
-				verticeProduto.put(melhorVertice.getRotulo(), infoVertice.get(melhorVertice.getRotulo()));
-				break;
-			}
-
-			aVisitar.remove(melhorVertice);
-
-			for (Vertice vizinho : grafo.getAdjacencias(melhorVertice.getRotulo())) {
-				String rotulo = vizinho.getRotulo();
-				int distancia = menorDistancia + grafo.getPeso(melhorVertice.getRotulo(), rotulo);
-				if (infoVertice.containsKey(rotulo)) {
-					Info info = infoVertice.get(rotulo);
-					if (distancia < info.distancia) {
-						info.distancia = distancia;
-						info.predecessor = melhorVertice; // grafo.getVertice(melhorVertice);
-					}
-				} else {
-					infoVertice.put(rotulo, new Info(distancia, melhorVertice)); // grafo.getVertice(melhorVertice)));
-					aVisitar.add(grafo.getVertice(rotulo));
-				}
-			}
-		}
-
-		return verticeProduto;
+		return caminho;
 	}
 
 	public class Info {
 		public int distancia;
-		public Vertice predecessor;
+		public Vertice predecessor = null;
 
 		Info(int distancia, Vertice predecessor) {
 			this.distancia = distancia;
 			this.predecessor = predecessor;
+		}
+
+		String reverse(String s) {
+			String newString = "";
+
+			for (int i = s.length() - 1; i >= 0; i--) {
+				newString += s.charAt(i);
+			}
+
+			return newString;
 		}
 	}
 }

@@ -8,19 +8,19 @@ import java.util.Map;
 
 class Caminho {
 	private Map<String, String> caminho;
-	
+
 	public Caminho() {
 		this.caminho = new HashMap<>();
 	}
-	
-	void ligar(String anterior, String proximo){
+
+	void ligar(String anterior, String proximo) {
 		this.caminho.put(anterior, proximo);
 	}
-	
-	public List<String> gerar(String origem, String destino){
+
+	public List<String> gerar(String origem, String destino) {
 		List<String> resultado = new ArrayList<>();
 		String no = destino;
-		while(no != origem && this.caminho.containsKey(no)) {
+		while (no != origem && this.caminho.containsKey(no)) {
 			resultado.add(no);
 			no = this.caminho.get(no);
 		}
