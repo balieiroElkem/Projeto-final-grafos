@@ -16,9 +16,9 @@ public class Vertice {
 	public String getRotulo() {
 		return this.rotulo;
 	}
-	
-	void addGrau(){
-	    grau++;
+
+	void addGrau() {
+		grau++;
 	}
 
 	public int getGrau() {
@@ -26,7 +26,7 @@ public class Vertice {
 	}
 
 	public String getProduto() {
-   	return produto;
+		return produto;
 	}
 
 	public void setProduto(String produto) {

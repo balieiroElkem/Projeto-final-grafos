@@ -12,10 +12,11 @@ public class AlgoritmoDijkstra {
 
 	private static AlgoritmoDijkstra algoritmoDijkstra;
 
-	private AlgoritmoDijkstra(){}
+	private AlgoritmoDijkstra() {
+	}
 
-	public static AlgoritmoDijkstra getInstance(){
-		if(algoritmoDijkstra == null){
+	public static AlgoritmoDijkstra getInstance() {
+		if (algoritmoDijkstra == null) {
 			return new AlgoritmoDijkstra();
 		}
 		return algoritmoDijkstra;
@@ -28,7 +29,7 @@ public class AlgoritmoDijkstra {
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 		Map<String, Info> infoVertice = new HashMap<>();
 		infoVertice.put(origem, new Info(0, null));
 
@@ -48,15 +49,15 @@ public class AlgoritmoDijkstra {
 
 			if (melhorVertice.equals(destino))
 				break;
-			
+
 			aVisitar.remove(melhorVertice);
-			
-			for(Vertice vizinho : grafo.getAdjacencias(melhorVertice)) {
+
+			for (Vertice vizinho : grafo.getAdjacencias(melhorVertice)) {
 				String rotulo = vizinho.getRotulo();
 				int distancia = menorDistancia + grafo.getPeso(melhorVertice, rotulo);
-				if(infoVertice.containsKey(rotulo)) {
+				if (infoVertice.containsKey(rotulo)) {
 					Info info = infoVertice.get(rotulo);
-					if(distancia < info.distancia) {
+					if (distancia < info.distancia) {
 						info.distancia = distancia;
 						info.predecessor = grafo.getVertice(melhorVertice);
 					}
@@ -66,7 +67,7 @@ public class AlgoritmoDijkstra {
 				}
 			}
 		}
-		
+
 		return infoVertice;
 	}
 
@@ -77,7 +78,7 @@ public class AlgoritmoDijkstra {
 		} catch (Exception e) {
 			throw e;
 		}
-		
+
 		Map<String, Info> infoVertice = new HashMap<>();
 		Map<String, Info> verticeProduto = new HashMap<>();
 		infoVertice.put(origem, new Info(0, null));
@@ -100,15 +101,15 @@ public class AlgoritmoDijkstra {
 				verticeProduto.put(melhorVertice.getRotulo(), infoVertice.get(melhorVertice.getRotulo()));
 				break;
 			}
-			
+
 			aVisitar.remove(melhorVertice);
-			
-			for(Vertice vizinho : grafo.getAdjacencias(melhorVertice.getRotulo())) {
+
+			for (Vertice vizinho : grafo.getAdjacencias(melhorVertice.getRotulo())) {
 				String rotulo = vizinho.getRotulo();
 				int distancia = menorDistancia + grafo.getPeso(melhorVertice.getRotulo(), rotulo);
-				if(infoVertice.containsKey(rotulo)) {
+				if (infoVertice.containsKey(rotulo)) {
 					Info info = infoVertice.get(rotulo);
-					if(distancia < info.distancia) {
+					if (distancia < info.distancia) {
 						info.distancia = distancia;
 						info.predecessor = melhorVertice; // grafo.getVertice(melhorVertice);
 					}
@@ -118,10 +119,10 @@ public class AlgoritmoDijkstra {
 				}
 			}
 		}
-		
+
 		return verticeProduto;
 	}
-	
+
 	public class Info {
 		public int distancia;
 		public Vertice predecessor;

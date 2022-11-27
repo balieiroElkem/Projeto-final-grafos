@@ -35,12 +35,13 @@ public class App {
     grafo.conectarVertices("s4", "s6", 5);
     grafo.conectarVertices("s4", "s7", 7);
     grafo.conectarVertices("s7", "s8", 1);
-    grafo.conectarVertices("s8", "s9",11);
+    grafo.conectarVertices("s8", "s9", 11);
 
     while (contador++ <= 2) {
       System.out.printf("Digite o nome produto: ");
       String produto = input.nextLine();
-      Map<String, Info> vertice = AlgoritmoDijkstra.getInstance().procurarProduto(grafo.getVertice("s1").getRotulo(), produto, grafo);
+      Map<String, Info> vertice = AlgoritmoDijkstra.getInstance().procurarProduto(grafo.getVertice("s1").getRotulo(),
+          produto, grafo);
 
       if (vertice.size() > 0) {
         for (String key : vertice.keySet()) {
